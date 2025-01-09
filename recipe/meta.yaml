@@ -7,20 +7,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/py-solc-ast-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/py-solc-ast-{{ version }}.tar.gz
   sha256: fb5defdb6e82ca4175a0ecd1c04ce37134df0c141fc60b08a5068e119d7e9850
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.6,<4.0
+    - python {{ python_min }}
   run:
-    - python >=3.6,<4.0
+    - python >={{ python_min }},<4.0
 
 test:
   imports:
@@ -29,6 +29,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/iamdefinitelyahuman/py-solc-ast
